@@ -13,6 +13,12 @@ class TextFontStyle {
     fontSize: 12.sp,
     fontWeight: FontWeight.w500, // Bold
   );
+  static final headline12StylenotoSerifBengali700 =
+      GoogleFonts.notoSerifBengali(
+    color: AppColors.cFDFDFD,
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w700, // Bold
+  );
   static final headline14StylenotoSerifBengaliTextBold =
       GoogleFonts.notoSerifBengali(
     color: AppColors.c6A6A6A,
