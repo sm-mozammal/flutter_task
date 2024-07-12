@@ -48,11 +48,17 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/Calendar.svg
   String get calendar => 'assets/svgs/Calendar.svg';
 
+  /// File path: assets/svgs/Clock Circle.svg
+  String get clockCircle => 'assets/svgs/Clock Circle.svg';
+
   /// File path: assets/svgs/Hamburger Menu.svg
   String get hamburgerMenu => 'assets/svgs/Hamburger Menu.svg';
 
   /// File path: assets/svgs/Home.svg
   String get home => 'assets/svgs/Home.svg';
+
+  /// File path: assets/svgs/Map Point.svg
+  String get mapPoint => 'assets/svgs/Map Point.svg';
 
   /// File path: assets/svgs/calender_selected.svg
   String get calenderSelected => 'assets/svgs/calender_selected.svg';
@@ -94,8 +100,10 @@ class $AssetsSvgsGen {
   List<String> get values => [
         bell,
         calendar,
+        clockCircle,
         hamburgerMenu,
         home,
+        mapPoint,
         calenderSelected,
         camera,
         demo1,

@@ -49,7 +49,7 @@ class ProfileCard extends StatelessWidget {
               UIHelper.verticalSpace(8.h),
               Text(
                 'সফটবিডি লিমিটেড',
-                style: TextFontStyle.headline14StylenotoSerifBengaliTextBold,
+                style: TextFontStyle.headline14StylenotoSerifBengali,
               ),
               Row(
                 children: [
@@ -60,8 +60,7 @@ class ProfileCard extends StatelessWidget {
                   ),
                   Text(
                     'ঢাকা',
-                    style:
-                        TextFontStyle.headline14StylenotoSerifBengaliTextBold,
+                    style: TextFontStyle.headline14StylenotoSerifBengali,
                   ),
                 ],
               )

@@ -109,12 +109,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          UIHelper.verticalSpace(26.h),
+          UIHelper.verticalSpace(20.h),
           SvgPicture.asset(
             iconPath,
             width: 30.w, // Set a default color for all icons
           ),
-          UIHelper.verticalSpace(24.h),
+          UIHelper.verticalSpace(20.h),
         ],
       ),
     );

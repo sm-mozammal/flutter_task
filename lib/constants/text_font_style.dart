@@ -19,11 +19,16 @@ class TextFontStyle {
     fontSize: 12.sp,
     fontWeight: FontWeight.w700, // Bold
   );
-  static final headline14StylenotoSerifBengaliTextBold =
-      GoogleFonts.notoSerifBengali(
+  static final headline14StylenotoSerifBengali = GoogleFonts.notoSerifBengali(
     color: AppColors.c6A6A6A,
     fontSize: 14.sp,
     fontWeight: FontWeight.w400, // Bold
+  );
+  static final headline14StylenotoSerifBengali500 =
+      GoogleFonts.notoSerifBengali(
+    color: AppColors.c6A6A6A,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w500, // Bold
   );
   static final headline14StylenotoSerifBengali600 =
       GoogleFonts.notoSerifBengali(

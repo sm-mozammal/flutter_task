@@ -25,11 +25,11 @@ class _SelectDayCardState extends State<SelectDayCard> {
     super.initState();
     _scrollController = ScrollController();
     _dateProvider = Provider.of<DateProvider>(context, listen: false);
-    _dateProvider.setSelectedDate(DateTime.now());
-    _dateProvider.addListener(_scrollToSelectedDate);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      _dateProvider.setSelectedDate(DateTime.now());
       _scrollToSelectedDate();
     });
+    _dateProvider.addListener(_scrollToSelectedDate);
   }
 
   @override
@@ -73,66 +73,66 @@ class _SelectDayCardState extends State<SelectDayCard> {
           )
         ],
       ),
-      child: GestureDetector(
-        child: SizedBox(
-          height: 80.h,
-          child: ListView.builder(
-              controller: _scrollController,
-              scrollDirection: Axis.horizontal,
-              itemCount: 15, // 7 days before + today + 7 days after
-              itemBuilder: (context, index) {
-                DateTime date =
-                    DateTime.now().subtract(Duration(days: 7 - index));
-                String dayName = DateFormat('EEE', 'bn')
-                    .format(date); // Format day in Bengali
-                String formattedDate = DateFormat('d', 'bn')
-                    .format(date); // Format date in Bengali
-                bool isSelected = date.day ==
-                        Provider.of<DateProvider>(context).selectedDate.day &&
-                    date.month ==
-                        Provider.of<DateProvider>(context).selectedDate.month &&
-                    date.year ==
-                        Provider.of<DateProvider>(context).selectedDate.year;
-                return GestureDetector(
-                  onTap: () {
-                    Provider.of<DateProvider>(context, listen: false)
-                        .setSelectedDate(date);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 5.sp, left: 5.sp),
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 45.w,
-                      height: 65.h,
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          side: isSelected
-                              ? BorderSide(width: 2.w, color: AppColors.c86B560)
-                              : BorderSide(
-                                  width: 0.w, color: Colors.transparent),
-                          borderRadius: BorderRadius.circular(20.r),
-                        ),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            dayName,
-                            style: TextFontStyle
-                                .headline14StylenotoSerifBengaliTextBold,
-                          ),
-                          Text(formattedDate,
-                              style: TextFontStyle
-                                  .headline16StylenotoSerifBengali),
-                        ],
+      child: SizedBox(
+        height: 80.h,
+        child: ListView.builder(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            itemCount: 15, // 7 days before + today + 7 days after
+            itemBuilder: (context, index) {
+              DateTime date =
+                  DateTime.now().subtract(Duration(days: 7 - index));
+              String dayName =
+                  DateFormat('EEE', 'bn').format(date); // Format day in Bengali
+              String formattedDate =
+                  DateFormat('d', 'bn').format(date); // Format date in Bengali
+
+              // To selecte the date
+              bool isSelected = date.day ==
+                      Provider.of<DateProvider>(context).selectedDate.day &&
+                  date.month ==
+                      Provider.of<DateProvider>(context).selectedDate.month &&
+                  date.year ==
+                      Provider.of<DateProvider>(context).selectedDate.year;
+
+              return GestureDetector(
+                onTap: () {
+                  Provider.of<DateProvider>(context, listen: false)
+                      .setSelectedDate(date);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(right: 5.sp, left: 5.sp),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 45.w,
+                    height: 65.h,
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        side: isSelected
+                            ? BorderSide(width: 2.w, color: AppColors.c86B560)
+                            : BorderSide(width: 0.w, color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
                     ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          dayName,
+                          textAlign: TextAlign.center,
+                          style: TextFontStyle.headline14StylenotoSerifBengali,
+                        ),
+                        Text(formattedDate,
+                            style:
+                                TextFontStyle.headline16StylenotoSerifBengali),
+                      ],
+                    ),
                   ),
-                );
-              }),
-        ),
+                ),
+              );
+            }),
       ),
     );
   }

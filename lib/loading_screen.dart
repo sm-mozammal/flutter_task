@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task/networks/api_acess.dart';
 import 'package:flutter_task/welcome_screen.dart';
 
 import 'helpers/helper_methods.dart';
@@ -23,7 +24,8 @@ class _LoadingState extends State<Loading> {
   loadInitialData() async {
     await setInitValue();
     _isLoading = true;
-    Future.delayed(Duration(milliseconds: 100));
+    getDataRX.fetchData();
+    // Future.delayed(Duration(milliseconds: 100));
     setState(() {
       _isLoading = false;
     });
@@ -34,8 +36,7 @@ class _LoadingState extends State<Loading> {
     if (_isLoading) {
       return const WelcomeScreen();
     } else {
-      // return Container();
-      // Need to place screen later...
+      // Navigate to Navigation screen...
       return NavigationScreen();
     }
   }
