@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_task/features/calender/presentation/calender_screen.dart';
 
 import '../features/home/presentation/home_screen.dart';
 
@@ -11,6 +12,7 @@ final class Routes {
 
   static const String splash = '/splash';
   static const String home = '/home';
+  static const String calender = '/calender';
 }
 
 final class RouteGenerator {
@@ -26,6 +28,12 @@ final class RouteGenerator {
                 widget: const ScreenTitle(widget: HomeScreen()),
                 settings: settings)
             : CupertinoPageRoute(builder: (context) => const HomeScreen());
+      case Routes.calender:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: const ScreenTitle(widget: CalenderScreen()),
+                settings: settings)
+            : CupertinoPageRoute(builder: (context) => const CalenderScreen());
 
       default:
         return null;

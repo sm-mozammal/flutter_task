@@ -22,11 +22,17 @@ class AppColors {
   /// Color: #FF000000
   static const Color c000000 = Color(0xFF000000);
 
+  /// Color: #FF202020
+  static const Color c202020 = Color(0xFF202020);
+
   /// Color: #FF336F4A
   static const Color c336F4A = Color(0xFF336F4A);
 
   /// Color: #FF3EE1D0
   static const Color c3EE1D0 = Color(0xFF3EE1D0);
+
+  /// Color: #FF6A6A6A
+  static const Color c6A6A6A = Color(0xFF6A6A6A);
 
   /// Color: #FF86B560
   static const Color c86B560 = Color(0xFF86B560);
@@ -34,8 +40,17 @@ class AppColors {
   /// Color: #FFF0F0F0
   static const Color cF0F0F0 = Color(0xFFF0F0F0);
 
+  /// Color: #FFF5F5F5
+  static const Color cF5F5F5 = Color(0xFFF5F5F5);
+
+  /// Color: #FFF6F6F6
+  static const Color cF6F6F6 = Color(0xFFF6F6F6);
+
   /// Color: #FFFEFFFE
   static const Color cFEFFFE = Color(0xFFFEFFFE);
+
+  /// Color: #FFFF737A
+  static const Color cFF737A = Color(0xFFFF737A);
 
   /// Color: #FFFFFFFF
   static const Color cFFFFFF = Color(0xFFFFFFFF);

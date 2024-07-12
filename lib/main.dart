@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task/gen/colors.gen.dart';
-import 'package:flutter_task/navigation_screen.dart';
+import 'package:flutter_task/loading_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -67,7 +67,10 @@ class UtillScreenMobile extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Kaam Services',
             theme: ThemeData(
-              appBarTheme: AppBarTheme(backgroundColor: AppColors.cFFFFFF),
+              appBarTheme: AppBarTheme(
+                backgroundColor: AppColors.cFFFFFF,
+                elevation: 0,
+              ),
               scaffoldBackgroundColor: AppColors.cFEFFFE,
               primaryColor: AppColors.c000000,
               useMaterial3: false,
@@ -83,7 +86,7 @@ class UtillScreenMobile extends StatelessWidget {
             },
             navigatorKey: NavigationService.navigatorKey,
             onGenerateRoute: RouteGenerator.generateRoute,
-            home: NavigationScreen(),
+            home: Loading(),
           ),
         );
       },

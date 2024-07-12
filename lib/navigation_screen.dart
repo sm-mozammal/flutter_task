@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_task/features/calender/presentation/calender_screen.dart';
 import 'package:flutter_task/features/home/presentation/home_screen.dart';
 import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';
@@ -17,7 +18,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const HomeScreen(),
+    const CalenderScreen(),
     const HomeScreen(),
     const HomeScreen(),
   ];

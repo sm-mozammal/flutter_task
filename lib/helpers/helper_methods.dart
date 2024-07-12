@@ -9,10 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
-import '/helpers/di.dart';
 import '/helpers/toast.dart';
 import '../common_widgets/custom_button.dart';
-import '../constants/app_constants.dart';
 import '../constants/text_font_style.dart';
 import '../gen/colors.gen.dart';
 
@@ -21,11 +19,7 @@ final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 final GlobalKey<PopupMenuButtonState<String>> popUpGlobalkey =
     GlobalKey<PopupMenuButtonState<String>>();
 
-Future<void> setInitValue() async {
-  await appData.writeIfNull(kKeyIsLoggedIn, false);
-  await appData.writeIfNull(kKeyIsExploring, false);
-  await Future.delayed(const Duration(seconds: 2));
-}
+Future<void> setInitValue() async {}
 
 Future<void> initiInternetChecker() async {
   InternetConnectionChecker.createInstance(

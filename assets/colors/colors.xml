@@ -4,23 +4,25 @@
   
   <color name="c86B560">#FF86B560</color>
   <color name="c336F4A">#FF336F4A</color>
+  <color name="c202020">#FF202020</color>
+  <color name="c6A6A6A">#FF6A6A6A</color>
+  <color name="cF5F5F5">#FFF5F5F5</color>
+  <color name="cF6F6F6">#FFF6F6F6</color>
+  <color name="cFF737A">#FFFF737A</color>
   
   <color name="alertButtonColor">#FFFEFFFB</color>
   <color name="white">#FFFFFFFF</color>
   <color name="cFFFFFF">#FFFFFFFF</color>
 
   <color name="cFEFFFE">#FFFEFFFE</color>
-<color name="c000000">#FF000000</color>
-<color name="cF0F0F0">#FFF0F0F0</color>
-<color name="c3EE1D0">#FF3EE1D0</color>
+  <color name="c000000">#FF000000</color>
+  <color name="cF0F0F0">#FFF0F0F0</color>
+  <color name="c3EE1D0">#FF3EE1D0</color>
 
   <color name="allPrimaryColor">#FFF9500A</color>
-
-  
   <color name="headLine1Color">#FF4A4A4A</color>
   <color name="headLine2Color">#FF131313</color>
 
-  
   <color name="scaffoldColor">#FFFBFBFB</color>
   <color name="primaryColor">#FF4D3E39</color>
 
