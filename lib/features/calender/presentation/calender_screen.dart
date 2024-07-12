@@ -12,6 +12,8 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/text_font_style.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../helpers/all_routes.dart';
+import '../../../helpers/navigation_service.dart';
 import 'widgets/activity_card.dart';
 import 'widgets/selected_day_card.dart';
 
@@ -90,6 +92,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                             provider.selectedDate),
                                   )
                                   .toList();
+                              provider.setSelectedList(filterData);
                               if (filterData.isEmpty) {
                                 // show when the filterData is empty
                                 return Center(
@@ -104,14 +107,14 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   padding: EdgeInsets.zero,
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: filterData.length,
+                                  itemCount: provider.list.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 10.h),
                                       child: ActivityCard(
                                         index: index,
-                                        data: filterData[index],
+                                        data: provider.list[index],
                                       ),
                                     );
                                   },
@@ -143,8 +146,11 @@ class _CalenderScreenState extends State<CalenderScreen> {
           style: TextFontStyle.headline16StylenotoSerifBengali700,
         ),
         ActionButton(
+          onTap: () {
+            NavigationService.navigateTo(Routes.addNewActivities);
+          },
           name: 'নতুন যোগ করুন',
-          width: 100.w,
+          width: 110.w,
           height: 30.h,
           borderRadius: 18.r,
         )
@@ -177,7 +183,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
               ),
               child: Padding(
                 padding: EdgeInsets.all(4.sp),
-                child: SvgPicture.asset(Assets.svgs.bell),
+                child: SvgPicture.asset(Assets.svgs.notificationBadge),
               )),
         ),
       ],

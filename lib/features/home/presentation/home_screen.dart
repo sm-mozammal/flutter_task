@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_task/common_widgets/drawer.dart';
 import 'package:flutter_task/constants/app_constants.dart';
 import 'package:flutter_task/constants/text_font_style.dart';
 import 'package:flutter_task/gen/assets.gen.dart';
@@ -20,9 +23,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // ignore: unused_field
+  bool _navigationOn = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: AppDrawer(),
+      onDrawerChanged: (isOpened) => setState(() {
+        isOpened = !isOpened;
+      }),
       // Home Screen AppBar
       appBar: _buildAppBar(),
       body: Center(
@@ -162,8 +174,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       leading: Padding(
         padding: EdgeInsets.only(left: 24.w),
-        child: SvgPicture.asset(
-          Assets.svgs.hamburgerMenu,
+        child: GestureDetector(
+          onTap: () {
+            log('click');
+            _scaffoldKey.currentState?.openDrawer();
+          },
+          child: SvgPicture.asset(
+            Assets.svgs.hamburgerMenu,
+          ),
         ),
       ),
       title: Row(
@@ -183,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: [
         Padding(
           padding: EdgeInsets.only(right: 24.w),
-          child: SvgPicture.asset(Assets.svgs.bell),
+          child: SvgPicture.asset(Assets.svgs.notificationBadge),
         ),
       ],
     );

@@ -6,9 +6,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+import '../common_widgets/action_button.dart';
+import '../gen/assets.gen.dart';
 import '/helpers/toast.dart';
 import '../common_widgets/custom_button.dart';
 import '../constants/text_font_style.dart';
@@ -98,47 +101,46 @@ void rotation() {
   ]);
 }
 
-// class Alert {
-//   static showLoadingIndicatorDialog(BuildContext context) {
-//     showDialog(
-//         context: context,
-//         barrierDismissible: false,
-//         builder: (BuildContext context) {
-//           return Dialog(
-//             insetPadding: const EdgeInsets.symmetric(horizontal: 20),
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(12),
-//             ),
-//             elevation: 0,
-//             backgroundColor: Colors.transparent,
-//             child: Container(
-//               height: 220,
-//               width: 100,
-//               decoration: BoxDecoration(
-//                 shape: BoxShape.rectangle,
-//                 color: Colors.black12,
-//                 borderRadius: BorderRadius.circular(20),
-//               ),
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: [
-//                   CircleAvatar(
-//                     backgroundColor: Colors.transparent,
-//                     radius: 45,
-//                     child: Image.asset(Assets.images.splashLogo.path),
-//                   ),
-//                   const Center(
-//                     child: CircularProgressIndicator(
-//                       color: Colors.black,
-//                     ),
-//                   )
-//                 ],
-//               ),
-//             ),
-//           );
-//         });
-//   }
-// }
+void showCustomAlertDialog(BuildContext context, {VoidCallback? onAction}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+                Assets.svgs.alertSuccess), // Ensure this path is correct
+            Text(
+              'নতুন অনুচ্ছেদ সংরক্ষন',
+              textAlign: TextAlign.center,
+              style: TextFontStyle.headline16StylenotoSerifBengali700
+                  .copyWith(height: 1.5),
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              'আপনার সময়রেখাতে নতুন অনুচ্ছেদ সংরক্ষণ সম্পূর্ণ হয়েছে',
+              textAlign: TextAlign.center,
+              style: TextFontStyle.headline14StylenotoSerifBengali
+                  .copyWith(height: 1.5),
+            ),
+            SizedBox(height: 16.h), // UIHelper.verticalSpaceMedium equivalent
+            ActionButton(
+              name: 'আরও যোগ করুন',
+              height: 50.h,
+              width: 290.w,
+              borderRadius: 8.r,
+              onTap: onAction ?? () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
 
 void changeFocus(
     {required BuildContext context,

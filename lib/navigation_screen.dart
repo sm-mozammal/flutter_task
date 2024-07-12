@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task/features/calender/presentation/calender_screen.dart';
 import 'package:flutter_task/features/home/presentation/home_screen.dart';
+import 'constants/text_font_style.dart';
 import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';
 import 'helpers/helper_methods.dart';
@@ -19,9 +22,17 @@ class _NavigationScreenState extends State<NavigationScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CalenderScreen(),
-    const HomeScreen(),
-    const HomeScreen(),
+    const Screen(),
+    const Screen(),
   ];
+
+  void onTap(int index) {
+    log(_currentIndex.toString());
+    setState(() {
+      _currentIndex = index;
+      log(_currentIndex.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,6 +127,22 @@ class _NavigationScreenState extends State<NavigationScreen> {
           ),
           UIHelper.verticalSpace(20.h),
         ],
+      ),
+    );
+  }
+}
+
+class Screen extends StatelessWidget {
+  const Screen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Flutter Task',
+          style: TextFontStyle.headline16StylenotoSerifBengaliTextBold,
+        ),
       ),
     );
   }

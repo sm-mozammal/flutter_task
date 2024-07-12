@@ -60,6 +60,15 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/Map Point.svg
   String get mapPoint => 'assets/svgs/Map Point.svg';
 
+  /// File path: assets/svgs/alert_success.svg
+  String get alertSuccess => 'assets/svgs/alert_success.svg';
+
+  /// File path: assets/svgs/back_arrow.svg
+  String get backArrow => 'assets/svgs/back_arrow.svg';
+
+  /// File path: assets/svgs/calendar_outline.svg
+  String get calendarOutline => 'assets/svgs/calendar_outline.svg';
+
   /// File path: assets/svgs/calender_selected.svg
   String get calenderSelected => 'assets/svgs/calender_selected.svg';
 
@@ -68,6 +77,12 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/demo 1.svg
   String get demo1 => 'assets/svgs/demo 1.svg';
+
+  /// File path: assets/svgs/front_arrow_ios.svg
+  String get frontArrowIos => 'assets/svgs/front_arrow_ios.svg';
+
+  /// File path: assets/svgs/location_outline.svg
+  String get locationOutline => 'assets/svgs/location_outline.svg';
 
   /// File path: assets/svgs/menu1.svg
   String get menu1 => 'assets/svgs/menu1.svg';
@@ -83,6 +98,9 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/menu5.svg
   String get menu5 => 'assets/svgs/menu5.svg';
+
+  /// File path: assets/svgs/notification_badge.svg
+  String get notificationBadge => 'assets/svgs/notification_badge.svg';
 
   /// File path: assets/svgs/person.svg
   String get person => 'assets/svgs/person.svg';
@@ -104,14 +122,20 @@ class $AssetsSvgsGen {
         hamburgerMenu,
         home,
         mapPoint,
+        alertSuccess,
+        backArrow,
+        calendarOutline,
         calenderSelected,
         camera,
         demo1,
+        frontArrowIos,
+        locationOutline,
         menu1,
         menu2,
         menu3,
         menu4,
         menu5,
+        notificationBadge,
         person,
         profile,
         selectedHome,
