@@ -5,14 +5,11 @@ import 'package:flutter_task/loading_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:provider/provider.dart';
-
 import '/helpers/all_routes.dart';
 import 'helpers/di.dart';
 import 'helpers/helper_methods.dart';
 import 'helpers/keyboard.dart';
 import 'helpers/navigation_service.dart';
-import 'helpers/register_provider.dart';
 import 'networks/dio/dio.dart';
 
 void main() async {
@@ -35,19 +32,17 @@ class MyApp extends StatelessWidget {
     rotation();
     setInitValue();
     KeyboardUtil.hideKeyboard(context);
-    return MultiProvider(
-        providers: providers,
-        child: PopScope(
-          canPop: false,
-          onPopInvoked: (bool didPop) async {
-            showMaterialDialog(context);
-          },
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return const UtillScreenMobile();
-            },
-          ),
-        ));
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        showMaterialDialog(context);
+      },
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return const UtillScreenMobile();
+        },
+      ),
+    );
   }
 }
 

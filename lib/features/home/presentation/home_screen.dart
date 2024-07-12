@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Profile Card (Show Image , Name , Company Name , Location)
+              // Display Profile Information (Show Image , Name , Company Name , Location)
               ProfileCard(),
               UIHelper.verticalSpaceMedium,
               Row(

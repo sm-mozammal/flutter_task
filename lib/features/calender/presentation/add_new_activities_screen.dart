@@ -7,15 +7,15 @@ import 'package:flutter_task/features/calender/model/response_data.dart';
 import 'package:flutter_task/helpers/navigation_service.dart';
 import 'package:flutter_task/helpers/ui_helpers.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import '../../../common_widgets/action_button.dart';
 import '../../../common_widgets/custome_textfield.dart';
 import '../../../constants/text_font_style.dart';
+import '../../../controller/date_controler.dart';
 import '../../../gen/assets.gen.dart';
+import '../../../helpers/di.dart';
 import '../../../helpers/helper_methods.dart';
 import '../../../helpers/keyboard.dart';
 import '../../../helpers/toast.dart';
-import '../../../providers/date_provider.dart';
 
 class AddNewActivitiesScreen extends StatefulWidget {
   const AddNewActivitiesScreen({super.key});
@@ -32,8 +32,10 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
   final pDescController = TextEditingController();
   ValueNotifier<int> descCharCount = ValueNotifier<int>(0);
   final formKey = GlobalKey<FormState>();
-  String selectedDate = '';
+  String selectedDate =
+      DateFormat('dd/MM/yyyy hh:mm', 'bn').format(DateTime.now());
   String milisecond = '';
+  final DateController dateController = locator<DateController>();
 
   @override
   void dispose() {
@@ -59,6 +61,7 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
                 leadingText: 'অনুচ্ছেদ', trailingText: '৪৫ শব্দ'),
             UIHelper.verticalSpace(8.h),
 
+            // Input Filed
             _buildInputSection(
               inputFormatters: [LengthLimitingTextInputFormatter(45)],
               controller: pTitleController,
@@ -75,9 +78,11 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
             ),
             UIHelper.verticalSpaceMedium,
 
+            //Display Heading Section
             _buildHeaderSection(leadingText: 'অনুচ্ছেদের বিভাগ'),
             UIHelper.verticalSpace(8.h),
 
+            // Input Filed
             _buildInputSection(
               controller: pSectionController,
               isSuffixNeeded: true,
@@ -100,21 +105,46 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
                 _pickedDate(context);
               },
               child: Container(
-                child: _buildInputSection(
-                  readOnly: true,
-                  showCorsor: false,
-                  inputType: TextInputType.none,
-                  controller: pDatTimeController,
-                  prefixIcon: Assets.svgs.calendarOutline,
-                  isSuffixNeeded: true,
-                  hintText: 'নির্বাচন করুন',
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'অনুগ্রহ করে আপনার তারিখ নির্বাচন করুন';
-                    }
-                    return null;
-                  },
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+                clipBehavior: Clip.antiAlias,
+                decoration: ShapeDecoration(
+                  color: Color(0xFFFDFDFD),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 0.85, color: Color(0xFFF2F2F2)),
+                    borderRadius: BorderRadius.circular(6.78),
+                  ),
                 ),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      Assets.svgs.calendarOutline,
+                      height: 26.h,
+                    ),
+                    UIHelper.horizontalSpaceMedium,
+                    Text(
+                      selectedDate,
+                      style: TextFontStyle.headline14StylenotoSerifBengali,
+                    ),
+                    Spacer(),
+                    SvgPicture.asset(Assets.svgs.frontArrowIos, height: 26.h)
+                  ],
+                ),
+                // child: _buildInputSection(
+                //   // readOnly: true,
+                //   // showCorsor: false,
+                //   // inputType: TextInputType.none,
+                //   controller: pDatTimeController,
+                //   prefixIcon: Assets.svgs.calendarOutline,
+                //   isSuffixNeeded: true,
+                //   hintText: 'নির্বাচন করুন',
+                //   // validator: (value) {
+                //   //   if (value == null || value.isEmpty) {
+                //   //     return 'অনুগ্রহ করে আপনার তারিখ নির্বাচন করুন';
+                //   //   }
+                //   //   return null;
+                //   // },
+                // ),
               ),
             ),
             UIHelper.verticalSpaceMedium,
@@ -151,12 +181,12 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
               borderRadius: 8.r,
               onTap: () {
                 if (formKey.currentState?.validate() ?? false) {
-                  Provider.of<DateProvider>(context, listen: false).addList(
-                      Datum(
-                          name: pTitleController.text,
-                          category: pSectionController.text,
-                          date: DateTime.now().microsecond.toString(),
-                          location: pLocationController.text));
+                  dateController.list.add(Datum(
+                      name: pTitleController.text,
+                      category: pSectionController.text,
+                      date: "1720728000",
+                      location: pLocationController.text));
+                  clearController();
                   showCustomAlertDialog(context);
                 } else {
                   ToastUtil.showLongToast(
@@ -303,8 +333,16 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
       String formattedDate =
           DateFormat('dd/MM/yyyy hh:mm', 'bn').format(pickedDate);
       // Update the controller value
-      pDatTimeController.text = formattedDate;
+      selectedDate = formattedDate;
       milisecond = pickedDate.millisecond.toString();
     }
+  }
+
+  void clearController() {
+    pTitleController.clear();
+    pDescController.clear();
+    pDatTimeController.clear();
+    pLocationController.clear();
+    pSectionController.clear();
   }
 }

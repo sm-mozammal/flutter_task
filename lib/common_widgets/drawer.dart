@@ -82,7 +82,7 @@ class AppDrawer extends StatelessWidget {
                     hOnTap;
                   }
                 },
-                title: 'Workouts'),
+                title: 'সময়রেখা'),
             SizedBox(
               height: 16.h,
             ),
@@ -95,7 +95,7 @@ class AppDrawer extends StatelessWidget {
                     hOnTap;
                   }
                 },
-                title: 'Profile'),
+                title: 'প্রোফাইল'),
           ],
         ),
       ),

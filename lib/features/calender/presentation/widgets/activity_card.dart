@@ -28,9 +28,9 @@ class ActivityCard extends StatelessWidget {
           // 'সকাল \n১১:০০ মি.',
           textAlign: TextAlign.center,
           style: (index + 1) % 2 == 0
-              ? TextFontStyle.headline14StyleMontserrat
+              ? TextFontStyle.headline14StylenotoSerifBengali500
                   .copyWith(color: AppColors.c2A61EE)
-              : TextFontStyle.headline14StyleMontserrat,
+              : TextFontStyle.headline14StylenotoSerifBengali500,
         ),
         Container(
           width: 207.w,

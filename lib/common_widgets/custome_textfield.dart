@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,86 +72,92 @@ final class CustomFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      showCursor: showCorsor ?? true,
-      cursorHeight: cursorHeight ?? 20.h,
-      cursorColor: AppColors.c22252D,
-      focusNode: focusNode,
-      obscureText: isPass ? isObsecure : false,
-      textInputAction: textInputAction,
-      autovalidateMode:
-          validation! ? AutovalidateMode.always : AutovalidateMode.disabled,
-      validator: validator,
-      maxLines: maxline ?? 1,
-      controller: textEditingController,
-      onFieldSubmitted: onFieldSubmitted,
-      readOnly: readOnly,
-      onChanged: onChanged,
-      inputFormatters: inputFormatters,
-      enabled: isEnabled,
-      decoration: InputDecoration(
-        suffixIcon: suffixIcon,
-        fillColor: AppColors.cFDFDFD,
-        filled: true,
-        prefixIcon: prefixIcon,
-        contentPadding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
-        hintText: hintText,
-        hintStyle: TextFontStyle.headline14StylenotoSerifBengali,
-        labelText: labelText,
-        labelStyle: labelStyle ??
-            TextStyle(
-              fontSize: 10.sp,
-              fontWeight: FontWeight.w400,
-              color: AppColors.c8993A4,
-            ),
-        errorStyle: TextStyle(
-          fontSize: 10.sp,
-          fontWeight: FontWeight.w400,
-          color: Colors.red,
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.0.r),
-          borderSide: BorderSide(
-            color: focusedErrorBorderColor ?? AppColors.cdfe1e6,
-            width: 1.5,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.0.r),
-          borderSide: BorderSide(
-            color: AppColors.cF2F2F2,
-            width: 1.5,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.0.r),
-          borderSide: BorderSide(
-            color: AppColors.cF2F2F2,
-            width: 1.5,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.0.r),
-          borderSide: BorderSide(
-            color: errorBorderColor ?? Colors.red,
-            width: 1.5,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.0.r),
-          borderSide: BorderSide(
-            color: AppColors.cF2F2F2,
-            width: 1.5,
-          ),
-        ),
-      ),
-      style: style ??
-          TextStyle(
-            fontSize: 14.sp,
+    return GestureDetector(
+      onTap: () {
+        log('textfiled on tap');
+      },
+      child: TextFormField(
+        showCursor: showCorsor ?? true,
+        cursorHeight: cursorHeight ?? 20.h,
+        cursorColor: AppColors.c22252D,
+        focusNode: focusNode,
+        obscureText: isPass ? isObsecure : false,
+        textInputAction: textInputAction,
+        autovalidateMode:
+            validation! ? AutovalidateMode.always : AutovalidateMode.disabled,
+        validator: validator,
+        maxLines: maxline ?? 1,
+        controller: textEditingController,
+        onFieldSubmitted: onFieldSubmitted,
+        readOnly: readOnly,
+        onChanged: onChanged,
+        inputFormatters: inputFormatters,
+        enabled: isEnabled,
+        decoration: InputDecoration(
+          suffixIcon: suffixIcon,
+          fillColor: AppColors.cFDFDFD,
+          filled: true,
+          prefixIcon: prefixIcon,
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 10.h, horizontal: 14.w),
+          hintText: hintText,
+          hintStyle: TextFontStyle.headline14StylenotoSerifBengali,
+          labelText: labelText,
+          labelStyle: labelStyle ??
+              TextStyle(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w400,
+                color: AppColors.c8993A4,
+              ),
+          errorStyle: TextStyle(
+            fontSize: 10.sp,
             fontWeight: FontWeight.w400,
-            color: AppColors.c22252D,
+            color: Colors.red,
           ),
-      keyboardType: inputType,
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.0.r),
+            borderSide: BorderSide(
+              color: focusedErrorBorderColor ?? AppColors.cdfe1e6,
+              width: 1.5,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.0.r),
+            borderSide: BorderSide(
+              color: AppColors.cF2F2F2,
+              width: 1.5,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.0.r),
+            borderSide: BorderSide(
+              color: AppColors.cF2F2F2,
+              width: 1.5,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.0.r),
+            borderSide: BorderSide(
+              color: errorBorderColor ?? Colors.red,
+              width: 1.5,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4.0.r),
+            borderSide: BorderSide(
+              color: AppColors.cF2F2F2,
+              width: 1.5,
+            ),
+          ),
+        ),
+        style: style ??
+            TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w400,
+              color: AppColors.c22252D,
+            ),
+        keyboardType: inputType,
+      ),
     );
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../constants/text_font_style.dart';
+import '../../../../controller/date_controler.dart';
 import '../../../../gen/colors.gen.dart';
-import '../../../../providers/date_provider.dart';
+import '../../../../helpers/di.dart';
 
 class SelectDayCard extends StatefulWidget {
   const SelectDayCard({
@@ -18,30 +19,29 @@ class SelectDayCard extends StatefulWidget {
 
 class _SelectDayCardState extends State<SelectDayCard> {
   late ScrollController _scrollController;
-  late DateProvider _dateProvider;
+  final DateController _dateController = locator<DateController>();
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _dateProvider = Provider.of<DateProvider>(context, listen: false);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _dateProvider.setSelectedDate(DateTime.now());
+      _dateController.setSelectedDate(DateTime.now());
       _scrollToSelectedDate();
     });
-    _dateProvider.addListener(_scrollToSelectedDate);
+    ever(_dateController.selectedDate, (_) => _scrollToSelectedDate());
   }
 
   @override
   void dispose() {
-    _dateProvider.removeListener(_scrollToSelectedDate);
+    _dateController.removeListener(_scrollToSelectedDate);
     _scrollController.dispose();
     super.dispose();
   }
 
   void _scrollToSelectedDate() {
     final selectedDateIndex =
-        _dateProvider.selectedDate.difference(DateTime.now()).inDays +
+        _dateController.selectedDate.value.difference(DateTime.now()).inDays +
             7; // Calculate index based on selected date
     final itemCount = 15; // Total items (7 days before + today + 7 days after)
 
@@ -87,51 +87,51 @@ class _SelectDayCardState extends State<SelectDayCard> {
               String formattedDate =
                   DateFormat('d', 'bn').format(date); // Format date in Bengali
 
-              // To selecte the date
-              bool isSelected = date.day ==
-                      Provider.of<DateProvider>(context).selectedDate.day &&
-                  date.month ==
-                      Provider.of<DateProvider>(context).selectedDate.month &&
-                  date.year ==
-                      Provider.of<DateProvider>(context).selectedDate.year;
-
-              return GestureDetector(
-                onTap: () {
-                  Provider.of<DateProvider>(context, listen: false)
-                      .setSelectedDate(date);
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(right: 5.sp, left: 5.sp),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 45.w,
-                    height: 65.h,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: isSelected
-                            ? BorderSide(width: 2.w, color: AppColors.c86B560)
-                            : BorderSide(width: 0.w, color: Colors.transparent),
-                        borderRadius: BorderRadius.circular(20.r),
+              return Obx(() {
+                // To selecte the date
+                bool isSelected = date.day ==
+                        _dateController.selectedDate.value.day &&
+                    date.month == _dateController.selectedDate.value.month &&
+                    date.year == _dateController.selectedDate.value.year;
+                return GestureDetector(
+                  onTap: () {
+                    _dateController.setSelectedDate(date);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 5.sp, left: 5.sp),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 45.w,
+                      height: 65.h,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: isSelected
+                              ? BorderSide(width: 2.w, color: AppColors.c86B560)
+                              : BorderSide(
+                                  width: 0.w, color: Colors.transparent),
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            dayName,
+                            textAlign: TextAlign.center,
+                            style:
+                                TextFontStyle.headline14StylenotoSerifBengali,
+                          ),
+                          Text(formattedDate,
+                              style: TextFontStyle
+                                  .headline16StylenotoSerifBengali),
+                        ],
                       ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          dayName,
-                          textAlign: TextAlign.center,
-                          style: TextFontStyle.headline14StylenotoSerifBengali,
-                        ),
-                        Text(formattedDate,
-                            style:
-                                TextFontStyle.headline16StylenotoSerifBengali),
-                      ],
-                    ),
                   ),
-                ),
-              );
+                );
+              });
             }),
       ),
     );

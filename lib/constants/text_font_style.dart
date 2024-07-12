@@ -71,19 +71,4 @@ class TextFontStyle {
     fontSize: 18.sp,
     fontWeight: FontWeight.w700, // Bold
   );
-
-  static final headline10StyleMontserrat600 = GoogleFonts.montserrat(
-      color: AppColors.cFFFFFF, fontSize: 10.sp, fontWeight: FontWeight.w600);
-  static final headline9StyleMontserrat = GoogleFonts.montserrat(
-      color: AppColors.cFFFFFF, fontSize: 9.sp, fontWeight: FontWeight.w400);
-  static final headline9StyleMontserrat700 = GoogleFonts.montserrat(
-      color: AppColors.cFEFFFE, fontSize: 9.sp, fontWeight: FontWeight.w700);
-  static final headline8StyleMontserrat = GoogleFonts.montserrat(
-      color: AppColors.cFFFFFF, fontSize: 8.sp, fontWeight: FontWeight.w400);
-  static final headline7StyleMontserrat = GoogleFonts.montserrat(
-      color: AppColors.cFFFFFF, fontSize: 7.sp, fontWeight: FontWeight.bold);
-  static final headline14StyleMontserrat300 = GoogleFonts.montserrat(
-      color: AppColors.cFFFFFF, fontSize: 14.sp, fontWeight: FontWeight.w300);
-  static final headline14StyleMontserrat = GoogleFonts.montserrat(
-      color: AppColors.c000000, fontSize: 14.sp, fontWeight: FontWeight.w400);
 }

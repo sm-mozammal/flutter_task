@@ -75,4 +75,9 @@ class Datum {
         "category": category,
         "location": location,
       };
+
+  @override
+  String toString() {
+    return 'Datum(date: $date, name: $name, category: $category, location: $location)';
+  }
 }

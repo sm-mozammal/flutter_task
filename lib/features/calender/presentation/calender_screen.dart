@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,13 +8,14 @@ import 'package:flutter_task/common_widgets/custom_container.dart';
 import 'package:flutter_task/helpers/dateuitl.dart';
 import 'package:flutter_task/helpers/ui_helpers.dart';
 import 'package:flutter_task/networks/api_acess.dart';
-import 'package:flutter_task/providers/date_provider.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../../constants/text_font_style.dart';
+import '../../../controller/date_controler.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../helpers/all_routes.dart';
+import '../../../helpers/di.dart';
 import '../../../helpers/navigation_service.dart';
 import 'widgets/activity_card.dart';
 import 'widgets/selected_day_card.dart';
@@ -25,6 +28,11 @@ class CalenderScreen extends StatefulWidget {
 }
 
 class _CalenderScreenState extends State<CalenderScreen> {
+  // final DateController dateController = Get.find<DateController>();
+  // final DateController dateController = Get.put(DateController());
+
+  final DateController dateController = locator<DateController>();
+
   @override
   void initState() {
     super.initState();
@@ -71,6 +79,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           );
                         } else if (snapshot.hasData && snapshot.data != null) {
                           final data = snapshot.data!;
+
+                          dateController.setSelectedList(data.data ?? []);
                           if (data.data!.isEmpty) {
                             // Show when the data is empty
                             return Center(
@@ -81,18 +91,19 @@ class _CalenderScreenState extends State<CalenderScreen> {
                               ),
                             );
                           } else {
-                            return Consumer<DateProvider>(
-                                builder: (context, provider, _) {
-                              final filterData = data.data!
+                            return Obx(() {
+                              // Filter List By Date
+                              final filterData = dateController.list
                                   .where(
                                     (element) =>
                                         DateFormatedUtils.formatDate(
                                             element.date!) ==
                                         DateFormatedUtils.formatDateTime(
-                                            provider.selectedDate),
+                                            dateController.selectedDate.value),
                                   )
                                   .toList();
-                              provider.setSelectedList(filterData);
+                              log('filterData: ${filterData.toList()}');
+                              log('dataController: ${dateController.list}');
                               if (filterData.isEmpty) {
                                 // show when the filterData is empty
                                 return Center(
@@ -107,14 +118,14 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   padding: EdgeInsets.zero,
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
-                                  itemCount: provider.list.length,
+                                  itemCount: filterData.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 10.h),
                                       child: ActivityCard(
                                         index: index,
-                                        data: provider.list[index],
+                                        data: filterData[index],
                                       ),
                                     );
                                   },
@@ -145,6 +156,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
           'আজ, ${DateFormat('d MMMM', 'bn').format(DateTime.now())}',
           style: TextFontStyle.headline16StylenotoSerifBengali700,
         ),
+
+        // Navigate to Add New Activitics Screen
         ActionButton(
           onTap: () {
             NavigationService.navigateTo(Routes.addNewActivities);
