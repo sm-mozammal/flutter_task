@@ -15,6 +15,8 @@ import '../../../gen/assets.gen.dart';
 import '../../../helpers/di.dart';
 import '../../../helpers/helper_methods.dart';
 import '../../../helpers/keyboard.dart';
+
+import 'package:get/get.dart';
 import '../../../helpers/toast.dart';
 
 class AddNewActivitiesScreen extends StatefulWidget {
@@ -99,54 +101,56 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
             _buildHeaderSection(leadingText: 'তারিখ ও সময়'),
             UIHelper.verticalSpace(8.h),
 
-            GestureDetector(
-              onTap: () async {
-                log('onTap');
-                _pickedDate(context);
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-                clipBehavior: Clip.antiAlias,
-                decoration: ShapeDecoration(
-                  color: Color(0xFFFDFDFD),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 0.85, color: Color(0xFFF2F2F2)),
-                    borderRadius: BorderRadius.circular(6.78),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      Assets.svgs.calendarOutline,
-                      height: 26.h,
+            Obx(() {
+              return GestureDetector(
+                  onTap: () async {
+                    log('onTap');
+                    _pickedDate(context);
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: ShapeDecoration(
+                      color: Color(0xFFFDFDFD),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(width: 0.85, color: Color(0xFFF2F2F2)),
+                        borderRadius: BorderRadius.circular(6.78),
+                      ),
                     ),
-                    UIHelper.horizontalSpaceMedium,
-                    Text(
-                      selectedDate,
-                      style: TextFontStyle.headline14StylenotoSerifBengali,
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          Assets.svgs.calendarOutline,
+                          height: 26.h,
+                        ),
+                        UIHelper.horizontalSpaceMedium,
+                        Text(
+                          dateController.pickedDate.value,
+                          style: TextFontStyle.headline14StylenotoSerifBengali,
+                        ),
+                        Spacer(),
+                        SvgPicture.asset(Assets.svgs.frontArrowIos,
+                            height: 26.h)
+                      ],
                     ),
-                    Spacer(),
-                    SvgPicture.asset(Assets.svgs.frontArrowIos, height: 26.h)
-                  ],
-                ),
-                // child: _buildInputSection(
-                //   // readOnly: true,
-                //   // showCorsor: false,
-                //   // inputType: TextInputType.none,
-                //   controller: pDatTimeController,
-                //   prefixIcon: Assets.svgs.calendarOutline,
-                //   isSuffixNeeded: true,
-                //   hintText: 'নির্বাচন করুন',
-                //   // validator: (value) {
-                //   //   if (value == null || value.isEmpty) {
-                //   //     return 'অনুগ্রহ করে আপনার তারিখ নির্বাচন করুন';
-                //   //   }
-                //   //   return null;
-                //   // },
-                // ),
-              ),
-            ),
+                    // child: _buildInputSection(
+                    //   // readOnly: true,
+                    //   // showCorsor: false,
+                    //   // inputType: TextInputType.none,
+                    //   controller: pDatTimeController,
+                    //   prefixIcon: Assets.svgs.calendarOutline,
+                    //   isSuffixNeeded: true,
+                    //   hintText: 'নির্বাচন করুন',
+                    //   // validator: (value) {
+                    //   //   if (value == null || value.isEmpty) {
+                    //   //     return 'অনুগ্রহ করে আপনার তারিখ নির্বাচন করুন';
+                    //   //   }
+                    //   //   return null;
+                    //   // },
+                    // ),
+                  ));
+            }),
             UIHelper.verticalSpaceMedium,
 
             _buildHeaderSection(leadingText: 'স্থান'),
@@ -181,13 +185,18 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
               borderRadius: 8.r,
               onTap: () {
                 if (formKey.currentState?.validate() ?? false) {
-                  dateController.list.add(Datum(
-                      name: pTitleController.text,
-                      category: pSectionController.text,
-                      date: "1720728000",
-                      location: pLocationController.text));
-                  clearController();
-                  showCustomAlertDialog2(context);
+                  if (dateController.timeStamp.value != '') {
+                    dateController.list.add(Datum(
+                        name: pTitleController.text,
+                        category: pSectionController.text,
+                        date: dateController.timeStamp.value,
+                        location: pLocationController.text));
+                    clearController();
+                    showCustomAlertDialog2(context);
+                  } else {
+                    ToastUtil.showLongToast(
+                        'অনুগ্রহ করে আপনার তারিখ নির্বাচন করুন');
+                  }
                 } else {
                   ToastUtil.showLongToast(
                       'অনুগ্রহ করে সকল তথ্য দিয়ে ফর্মটি পূরণ করুন');
@@ -332,8 +341,13 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
       // Format the picked date as desired
       String formattedDate =
           DateFormat('dd/MM/yyyy hh:mm', 'bn').format(pickedDate);
+      // Convert the picked date to a Unix timestamp
+
+      int unixTimestamp = pickedDate.millisecondsSinceEpoch ~/ 1000;
+
       // Update the controller value
-      selectedDate = formattedDate;
+      dateController.setPckedDate(formattedDate);
+      dateController.setTimeStamp(unixTimestamp.toString());
     }
   }
 

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../../constants/text_font_style.dart';
 import '../../../controller/auth_controller.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../gen/colors.gen.dart';
+import '../../../helpers/di.dart';
 import '../../../helpers/helper_methods.dart';
 import '../../../helpers/navigation_service.dart';
 import '../../../helpers/ui_helpers.dart';
@@ -21,7 +23,9 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final AuthController controller = Get.put(AuthController());
+  // final AuthController controller = Get.put(AuthController());
+  final AuthController controller =
+      Get.put<AuthController>(locator.get<AuthController>());
 
   // Controllers
   final TextEditingController companyController = TextEditingController();
@@ -123,9 +127,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             backgroundColor: AppColors.cF4F5F7,
             child: GetBuilder<AuthController>(
               builder: (provider) {
-                return ValueBuilder<XFile?>(
-                  initialValue: provider.imageFile,
-                  builder: (imageFile, updateFn) {
+                return ValueListenableBuilder<XFile?>(
+                  valueListenable: provider.imageFileNotifier,
+                  builder: (context, imageFile, child) {
+                    log('imageFile: $imageFile');
                     return imageFile != null
                         ? ClipOval(
                             child: Image.file(
@@ -257,7 +262,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             width: 290.w,
             borderRadius: 8.r,
             onTap: () {
-              NavigationService.goBack();
+              NavigationService.goBack;
             },
           ),
         ],
