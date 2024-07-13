@@ -33,7 +33,8 @@ class AuthController extends GetxController {
 
   void setImageFile(XFile? value) {
     imageFileNotifier.value = value;
-    imageFileNotifier.notifyListeners();
+    update();
+    // imageFileNotifier.notifyListeners();
   }
 
   @override

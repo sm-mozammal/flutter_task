@@ -11,6 +11,7 @@ import '../../../common_widgets/action_button.dart';
 import '../../../common_widgets/custome_textfield.dart';
 import '../../../constants/text_font_style.dart';
 import '../../../controller/date_controler.dart';
+import '../../../controller/notification_controller.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../helpers/di.dart';
 import '../../../helpers/helper_methods.dart';
@@ -38,6 +39,8 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
       DateFormat('dd/MM/yyyy hh:mm', 'bn').format(DateTime.now());
   String milisecond = '';
   final DateController dateController = locator<DateController>();
+  final NotificationController notificationController =
+      locator<NotificationController>();
 
   @override
   void dispose() {
@@ -191,6 +194,15 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
                         category: pSectionController.text,
                         date: dateController.timeStamp.value,
                         location: pLocationController.text));
+
+                    notificationController.addNotification(
+                      pTitleController.text,
+                      pSectionController.text,
+                      dateController.timeStamp
+                          .value, // You can format this date if needed
+                      pLocationController.text,
+                      pDescController.text, // Pass the description here
+                    );
                     clearController();
                     showCustomAlertDialog2(context);
                   } else {

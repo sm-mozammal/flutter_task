@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,12 +7,16 @@ import 'package:flutter_task/constants/app_constants.dart';
 import 'package:flutter_task/constants/text_font_style.dart';
 import 'package:flutter_task/gen/assets.gen.dart';
 import 'package:flutter_task/gen/colors.gen.dart';
+import 'package:flutter_task/helpers/all_routes.dart';
+import 'package:flutter_task/helpers/navigation_service.dart';
 import 'package:flutter_task/helpers/ui_helpers.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import '../../../controller/notification_controller.dart';
+import '../../../helpers/di.dart';
 import 'widges/count_container.dart';
 import 'widges/menu_card.dart';
 import 'widges/profile_card.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   // ignore: unused_field
   bool _navigationOn = true;
+  final NotificationController notificationController =
+      locator<NotificationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -199,9 +204,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 24.w),
-          child: SvgPicture.asset(Assets.svgs.notificationBadge),
+        GestureDetector(
+          onTap: () => NavigationService.navigateTo(Routes.notification),
+          child: Padding(
+            padding: EdgeInsets.only(right: 24.w),
+            child: Obx(() {
+              return SvgPicture.asset(
+                notificationController.isNewNotification
+                    ? Assets.svgs.notificationBadge
+                    : Assets.svgs
+                        .notification, // Assuming there's a simple notification SVG
+              );
+            }),
+          ),
         ),
       ],
     );

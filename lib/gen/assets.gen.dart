@@ -108,6 +108,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/menu5.svg
   String get menu5 => 'assets/svgs/menu5.svg';
 
+  /// File path: assets/svgs/notification.svg
+  String get notification => 'assets/svgs/notification.svg';
+
   /// File path: assets/svgs/notification_badge.svg
   String get notificationBadge => 'assets/svgs/notification_badge.svg';
 
@@ -150,6 +153,7 @@ class $AssetsSvgsGen {
         menu3,
         menu4,
         menu5,
+        notification,
         notificationBadge,
         person,
         profile,

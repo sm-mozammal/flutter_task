@@ -13,6 +13,7 @@ import 'package:intl/intl.dart';
 
 import '../../../constants/text_font_style.dart';
 import '../../../controller/date_controler.dart';
+import '../../../controller/notification_controller.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../helpers/all_routes.dart';
 import '../../../helpers/di.dart';
@@ -32,6 +33,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
   // final DateController dateController = Get.put(DateController());
 
   final DateController dateController = locator<DateController>();
+  final NotificationController notificationController =
+      locator<NotificationController>();
 
   @override
   void initState() {
@@ -185,19 +188,19 @@ class _CalenderScreenState extends State<CalenderScreen> {
         style: TextFontStyle.headline16StylenotoSerifBengaliTextBold,
       ),
       actions: [
-        Padding(
-          padding: EdgeInsets.only(right: 24.w),
-          child: Container(
-              width: 35.h,
-              height: 35.w,
-              decoration: ShapeDecoration(
-                color: Color(0xFFF4F5F6),
-                shape: CircleBorder(),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(4.sp),
-                child: SvgPicture.asset(Assets.svgs.notificationBadge),
-              )),
+        GestureDetector(
+          onTap: () => NavigationService.navigateTo(Routes.notification),
+          child: Padding(
+            padding: EdgeInsets.only(right: 24.w),
+            child: Obx(() {
+              return SvgPicture.asset(
+                notificationController.isNewNotification
+                    ? Assets.svgs.notificationBadge
+                    : Assets.svgs
+                        .notification, // Assuming there's a simple notification SVG
+              );
+            }),
+          ),
         ),
       ],
     );

@@ -5,6 +5,7 @@ import 'package:flutter_task/features/calender/presentation/calender_screen.dart
 
 import '../features/calender/presentation/add_new_activities_screen.dart';
 import '../features/home/presentation/home_screen.dart';
+import '../features/notification/presentation/notification_screen.dart';
 
 final class Routes {
   static final Routes _routes = Routes._internal();
@@ -15,6 +16,7 @@ final class Routes {
   static const String home = '/home';
   static const String calender = '/calender';
   static const String addNewActivities = '/add_new_activities';
+  static const String notification = '/notification';
 }
 
 final class RouteGenerator {
@@ -43,6 +45,12 @@ final class RouteGenerator {
                 settings: settings)
             : CupertinoPageRoute(
                 builder: (context) => const AddNewActivitiesScreen());
+      case Routes.notification:
+        return Platform.isAndroid
+            ? _FadedTransitionRoute(
+                widget: ScreenTitle(widget: NotificationScreen()),
+                settings: settings)
+            : CupertinoPageRoute(builder: (context) => NotificationScreen());
 
       default:
         return null;
