@@ -75,6 +75,12 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/camera.svg
   String get camera => 'assets/svgs/camera.svg';
 
+  /// File path: assets/svgs/circular_profile_edit.svg
+  String get circularProfileEdit => 'assets/svgs/circular_profile_edit.svg';
+
+  /// File path: assets/svgs/company_tf.svg
+  String get companyTf => 'assets/svgs/company_tf.svg';
+
   /// File path: assets/svgs/demo 1.svg
   String get demo1 => 'assets/svgs/demo 1.svg';
 
@@ -83,6 +89,9 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/location_outline.svg
   String get locationOutline => 'assets/svgs/location_outline.svg';
+
+  /// File path: assets/svgs/location_tf.svg
+  String get locationTf => 'assets/svgs/location_tf.svg';
 
   /// File path: assets/svgs/menu1.svg
   String get menu1 => 'assets/svgs/menu1.svg';
@@ -108,6 +117,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/profile.svg
   String get profile => 'assets/svgs/profile.svg';
 
+  /// File path: assets/svgs/profile_tf.svg
+  String get profileTf => 'assets/svgs/profile_tf.svg';
+
   /// File path: assets/svgs/selected_home.svg
   String get selectedHome => 'assets/svgs/selected_home.svg';
 
@@ -127,9 +139,12 @@ class $AssetsSvgsGen {
         calendarOutline,
         calenderSelected,
         camera,
+        circularProfileEdit,
+        companyTf,
         demo1,
         frontArrowIos,
         locationOutline,
+        locationTf,
         menu1,
         menu2,
         menu3,
@@ -138,6 +153,7 @@ class $AssetsSvgsGen {
         notificationBadge,
         person,
         profile,
+        profileTf,
         selectedHome,
         time
       ];

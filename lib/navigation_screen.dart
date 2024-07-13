@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task/features/calender/presentation/calender_screen.dart';
 import 'package:flutter_task/features/home/presentation/home_screen.dart';
+import 'package:flutter_task/features/profile/presentation/profile_screen.dart';
 import 'constants/text_font_style.dart';
 import 'gen/assets.gen.dart';
 import 'gen/colors.gen.dart';
@@ -23,7 +24,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     const HomeScreen(),
     const CalenderScreen(),
     const Screen(),
-    const Screen(),
+    EditProfileScreen(),
   ];
 
   void onTap(int index) {

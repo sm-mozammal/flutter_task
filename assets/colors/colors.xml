@@ -2,6 +2,10 @@
 <colors>
   // Colors
   
+
+  <color name="cF2F2F2">#FFF2F2F2</color>
+  <color name="cF4F5F7">#FFF4F5F7</color>
+  
   <color name="c86B560">#FF86B560</color>
   <color name="c336F4A">#FF336F4A</color>
   <color name="c202020">#FF202020</color>

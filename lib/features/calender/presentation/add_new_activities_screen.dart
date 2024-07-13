@@ -187,7 +187,7 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
                       date: "1720728000",
                       location: pLocationController.text));
                   clearController();
-                  showCustomAlertDialog(context);
+                  showCustomAlertDialog2(context);
                 } else {
                   ToastUtil.showLongToast(
                       'অনুগ্রহ করে সকল তথ্য দিয়ে ফর্মটি পূরণ করুন');
@@ -334,7 +334,6 @@ class _CalenderScreenState extends State<AddNewActivitiesScreen> {
           DateFormat('dd/MM/yyyy hh:mm', 'bn').format(pickedDate);
       // Update the controller value
       selectedDate = formattedDate;
-      milisecond = pickedDate.millisecond.toString();
     }
   }
 
