@@ -25,7 +25,7 @@ Experience of Flutter Assessment Task, meticulously crafted with attention to de
 
 |                    Profile Screen                    |                  Notification Screen                  |                      Humbarger Menu                       |                         Video                          |
 |:--------------------------------------------------------------:|:--------------------------------------------------------------:|:--------------------------------------------------------------:|:--------------------------------------------------------------:|
-| <img src="screenshots/5.png" height="400" width="auto"> | <img src="screenshots/6.png" height="400" width="auto"> | <img src="screenshots/7.png" height="400" width="auto"> | <video width="auto" height="400" controls><source src="video/video.mp4" type="video/mp4"></video> |
+| <img src="screenshots/5.png" height="400" width="auto"> | <img src="screenshots/6.png" height="400" width="auto"> | <img src="screenshots/7.png" height="400" width="auto"> | [![Watch the demo video](video/video.mp4)]  |
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/sm-mozammal/flutter_task`
