@@ -1,4 +1,4 @@
-# SoftBD Ltd. Flutter Assesment Task
+# Flutter Task
 ## Project Owner
 This project is owned and maintained by *** S.M. Mozammel Hossain Imon ***.
 
